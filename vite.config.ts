@@ -1,8 +1,13 @@
 import { defineConfig } from "vite";
 import preact from "@preact/preset-vite";
 
+const isPROD: boolean = process.env.NODE_ENV === "production";
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/standup-shuffler/",
+  server: {
+    port: 3000,
+  },
+  base: isPROD ? "/standup-shuffler/" : "/",
   plugins: [preact()],
 });
