@@ -1,12 +1,14 @@
 import { JSX } from "preact";
 import { useState } from "preact/hooks";
 
+import { GET, SAVE, CLEAR } from "./utils/localStorage";
+
 import Header from "./components/Header";
 import List from "./components/List";
 import Card from "./components/Card";
 
 const App = (): JSX.Element => {
-  const [people, setPeople] = useState<Array<string>>([]);
+  const [people, setPeople] = useState<Array<string>>(GET());
   const [typing, setTyping] = useState<string>("");
   const [current, setCurrent] = useState<string | undefined>(undefined);
 
@@ -16,6 +18,7 @@ const App = (): JSX.Element => {
 
     setPeople(people.concat(newPeople));
     setTyping("");
+    SAVE(newPeople);
   };
 
   const onTyping = ({
@@ -30,19 +33,20 @@ const App = (): JSX.Element => {
     );
 
     setCurrent(people[n]);
-    setPeople(update);
+    setPeople(people.length === 0 && GET().length > 0 ? GET() : update);
   };
 
   const clear = () => {
     setPeople([]);
     setCurrent(undefined);
+    CLEAR();
   };
 
   return (
     <main class="container">
       <Header />
       <form class="px-4 w-full" onSubmit={onSubmit}>
-        {!people.length && !current ? (
+        {!people.length && !current && (
           <div class="form-control w-full">
             <label class="label">
               <span class="label-text">
@@ -63,22 +67,18 @@ const App = (): JSX.Element => {
               </button>
             </div>
           </div>
-        ) : (
-          <></>
         )}
       </form>
 
-      {current ? (
+      {current && (
         <section class="px-4 animate-pulse my-8">
           <Card active={true}>{current}</Card>
         </section>
-      ) : (
-        <></>
       )}
 
       <List items={people} />
 
-      {people.length || current ? (
+      {(people.length || current) && (
         <footer class="shadow fixed bottom-0 left-0 w-full z-10 py-4 bg-white">
           <div class="px-4">
             <div class="btn-group w-full">
@@ -94,8 +94,6 @@ const App = (): JSX.Element => {
             </div>
           </div>
         </footer>
-      ) : (
-        <></>
       )}
     </main>
   );
