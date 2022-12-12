@@ -6,13 +6,14 @@ import { GET, SAVE, CLEAR } from "./utils/localStorage";
 import Header from "./components/Header";
 import List from "./components/List";
 import Card from "./components/Card";
+import Footer from "./components/Footer";
 
 const App = (): JSX.Element => {
   const [people, setPeople] = useState<Array<string>>(GET());
   const [typing, setTyping] = useState<string>("");
   const [current, setCurrent] = useState<string | undefined>(undefined);
 
-  const onSubmit = (event: Event) => {
+  const onSubmit = (event: Event): void => {
     event.preventDefault();
     const newPeople: Array<string> = typing.trim().split(",");
 
@@ -26,7 +27,7 @@ const App = (): JSX.Element => {
   }: JSX.TargetedEvent<HTMLInputElement, Event>): void =>
     setTyping(currentTarget.value);
 
-  const next = () => {
+  const next = (): void => {
     const n: number = Math.floor(Math.random() * people.length);
     const update: Array<string> = people.filter(
       (e: string, i: number): boolean => i !== n
@@ -36,7 +37,7 @@ const App = (): JSX.Element => {
     setPeople(people.length === 0 && GET().length > 0 ? GET() : update);
   };
 
-  const clear = () => {
+  const clear = (): void => {
     setPeople([]);
     setCurrent(undefined);
     CLEAR();
@@ -78,23 +79,7 @@ const App = (): JSX.Element => {
 
       <List items={people} />
 
-      {(people.length || current) && (
-        <footer class="shadow fixed bottom-0 left-0 w-full z-10 py-4 bg-white">
-          <div class="px-4">
-            <div class="btn-group w-full">
-              <button class="btn btn-error rounded-none w-2/4" onClick={clear}>
-                clear list
-              </button>
-              <button
-                class="btn btn-primary rounded-none w-2/4 text-white"
-                onClick={next}
-              >
-                next one!
-              </button>
-            </div>
-          </div>
-        </footer>
-      )}
+      <Footer visible={people.length > 0 || current !== undefined} next={next} clear={clear} />
     </main>
   );
 };
