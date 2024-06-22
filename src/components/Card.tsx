@@ -16,7 +16,7 @@ const Card = (props: Props): JSX.Element => {
           <div class="flex-shrink-0 mr-3">
             <img
               class="h-9 w-9"
-              src={`https://avatars.dicebear.com/api/bottts/${props.children}.svg`}
+              src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${props.children}`}
               alt={props.children}
             />
           </div>
