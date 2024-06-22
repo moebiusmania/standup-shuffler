@@ -30,7 +30,7 @@ const App = (): JSX.Element => {
   const next = (): void => {
     const n: number = Math.floor(Math.random() * people.length);
     const update: Array<string> = people.filter(
-      (e: string, i: number): boolean => i !== n
+      (_e: string, i: number): boolean => i !== n
     );
 
     setCurrent(people[n]);
@@ -79,7 +79,11 @@ const App = (): JSX.Element => {
 
       <List items={people} />
 
-      <Footer visible={people.length > 0 || current !== undefined} next={next} clear={clear} />
+      <Footer
+        visible={people.length > 0 || current !== undefined}
+        next={next}
+        clear={clear}
+      />
     </main>
   );
 };
