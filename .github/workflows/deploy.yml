@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,18 +19,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: 💻 Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
-      - run: npm test
-      - run: npm run build
 
-      - name: GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.0.1
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📝 Run unit tests
+        run: npm run test
+
+      - name: 🏗️ Build project
+        run: npm run build
+
+      - name: 🚀 Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Build directory to deploy
-          build_dir: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: dist
+
+      - name: 🏁 Deploy to GitHub Pages
+        id: gh-pages
+        uses: actions/deploy-pages@v4
