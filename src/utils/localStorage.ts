@@ -1,13 +1,12 @@
 const KEY: string = "standup-shuffler";
 
-export const GET = (): Array<string> =>
+export const GET = (): string[] =>
   localStorage.getItem(KEY)
     ? JSON.parse(localStorage.getItem(KEY) as string)
     : [];
 
-export const SAVE = (data: Array<string>): void => {
-  const DATA: string = JSON.stringify(data);
-  localStorage.setItem(KEY, DATA);
+export const SAVE = (data: string[]): void => {
+  localStorage.setItem(KEY, JSON.stringify(data));
 };
 
-export const CLEAR = (): void => localStorage.clear();
+export const CLEAR = (): void => localStorage.removeItem(KEY);

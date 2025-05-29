@@ -1,29 +1,39 @@
+import { JSX } from "preact";
+import styles from "./Footer.module.css";
+
 type Props = {
-  visible: Boolean;
+  visible: boolean;
   next: () => void;
   clear: () => void;
 };
 
-const Footer = ({ visible, next, clear }: Props) => {
-  return (<>
-    {(visible) && (
-      <footer class="shadow fixed bottom-0 left-0 w-full z-10 py-4 bg-white">
-        <div class="px-4">
-          <div class="btn-group w-full">
-            <button class="btn btn-error rounded-none w-2/4" onClick={clear}>
-              clear list
-            </button>
-            <button
-              class="btn btn-primary rounded-none w-2/4 text-white"
-              onClick={next}
-            >
-              next one!
-            </button>
-          </div>
-        </div>
-      </footer>
-    )}
-  </>)
-}
+const Footer = ({ visible, next, clear }: Props): JSX.Element => {
+  if (!visible) return <></>;
 
-export default Footer
+  return (
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.buttonGroup}>
+          <button
+            onClick={clear}
+            className={`${styles.button} ${styles.clearButton}`}
+            type="button"
+          >
+            <span className={styles.buttonIcon}>🗑️</span>
+            Clear List
+          </button>
+          <button
+            onClick={next}
+            className={`${styles.button} ${styles.nextButton}`}
+            type="button"
+          >
+            <span className={styles.buttonIcon}>🎯</span>
+            Next Person
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

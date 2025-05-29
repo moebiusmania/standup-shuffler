@@ -1,0 +1,78 @@
+{
+  "name": "Standup Shuffler",
+  "short_name": "Shuffler",
+  "description": "A beautiful tool to help manage standup meetings speaking order with random participant selection",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#dbeafe",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": [
+    "productivity",
+    "utilities",
+    "business"
+  ],
+  "icons": [
+    {
+      "src": "/src/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of Standup Shuffler"
+    },
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of Standup Shuffler"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add People",
+      "short_name": "Add",
+      "description": "Quickly add people to the shuffle list",
+      "url": "/?action=add",
+      "icons": [
+        {
+          "src": "/src/favicon.svg",
+          "sizes": "32x32",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Next Person",
+      "short_name": "Next",
+      "description": "Select the next person to speak",
+      "url": "/?action=next",
+      "icons": [
+        {
+          "src": "/src/favicon.svg",
+          "sizes": "32x32",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

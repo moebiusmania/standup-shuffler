@@ -1,28 +1,27 @@
+import { JSX } from "preact";
+import styles from "./Card.module.css";
+
 type Props = {
-  active?: Boolean;
   children: string;
+  current?: boolean;
 };
 
-const Card = (props: Props): JSX.Element => {
-  const classes: string = "card shadow compact rounded-none my-5";
-  const isActive: string = props.active
-    ? `${classes} bg-primary text-white`
-    : classes;
+const Card = ({ children, current = false }: Props): JSX.Element => {
+  const cardClass = current ? `${styles.card} ${styles.current}` : styles.card;
 
   return (
-    <div class={isActive}>
-      <div class="card-body">
-        <div class="flex">
-          <div class="flex-shrink-0 mr-3">
-            <img
-              class="h-9 w-9"
-              src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${props.children}`}
-              alt={props.children}
-            />
-          </div>
-          <div class="flex-grow">
-            <p class="capitalize text-2xl">{props.children}</p>
-          </div>
+    <div className={cardClass}>
+      <div className={styles.content}>
+        <div className={styles.avatarContainer}>
+          <img
+            className={styles.avatar}
+            src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${children}`}
+            alt={`Avatar for ${children}`}
+          />
+        </div>
+        <div className={styles.info}>
+          <p className={styles.name}>{children}</p>
+          {current && <div className={styles.status}>Speaking now</div>}
         </div>
       </div>
     </div>

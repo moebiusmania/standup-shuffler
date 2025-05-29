@@ -1,0 +1,121 @@
+.list {
+  padding: 0 var(--space-6);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.header {
+  padding: var(--space-4);
+  border-bottom: 2px solid var(--color-primary-light);
+  margin-bottom: var(--space-6);
+  background: var(--gradient-soft);
+  border-radius: var(--radius-lg);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.count {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  min-width: 28px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+  color: var(--color-gray-500);
+}
+
+.emptyIcon {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-4);
+  opacity: 0.6;
+}
+
+.emptyTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-2);
+}
+
+.emptyDescription {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  line-height: var(--line-height-relaxed);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* List transition container */
+.container > * {
+  transition: all var(--transition-spring);
+}
+
+/* Exit animation for removed items */
+.card-exit {
+  animation: slideOutCard 0.3s ease-in forwards;
+}
+
+@keyframes slideOutCard {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    max-height: 100px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.9);
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .list {
+    padding: 0 var(--space-4);
+  }
+  
+  .header {
+    padding: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+  
+  .title {
+    font-size: var(--font-size-base);
+  }
+  
+  .count {
+    min-width: 24px;
+    padding: var(--space-1) var(--space-2);
+  }
+  
+  .emptyState {
+    padding: var(--space-8) var(--space-2);
+  }
+  
+  .emptyIcon {
+    font-size: var(--font-size-3xl);
+  }
+} 

@@ -6,27 +6,40 @@ describe("Card", () => {
   it("renders with default styling", () => {
     render(<Card>john</Card>);
 
-    const card = screen.getByText("john");
-    expect(card).toBeInTheDocument();
-    expect(card.closest(".card")).toHaveClass(
-      "card shadow compact rounded-none my-5"
-    );
+    const name = screen.getByText("john");
+    expect(name).toBeInTheDocument();
+
+    const avatar = screen.getByAltText("Avatar for john");
+    expect(avatar).toBeInTheDocument();
   });
 
-  it("renders with active styling when active prop is true", () => {
-    render(<Card active={true}>jane</Card>);
+  it("renders with current styling when current prop is true", () => {
+    render(<Card current={true}>jane</Card>);
 
-    const cardElement = screen.getByText("jane").closest(".card");
-    expect(cardElement).toHaveClass("bg-primary text-white");
+    const name = screen.getByText("jane");
+    expect(name).toBeInTheDocument();
+
+    const status = screen.getByText("Speaking now");
+    expect(status).toBeInTheDocument();
   });
 
   it("renders avatar image with correct source", () => {
     render(<Card>alice</Card>);
 
-    const avatar = screen.getByAltText("alice");
+    const avatar = screen.getByAltText("Avatar for alice");
     expect(avatar).toHaveAttribute(
       "src",
       "https://api.dicebear.com/9.x/pixel-art/svg?seed=alice"
     );
+  });
+
+  it("does not render status when current prop is false", () => {
+    render(<Card current={false}>bob</Card>);
+
+    const name = screen.getByText("bob");
+    expect(name).toBeInTheDocument();
+
+    const status = screen.queryByText("Speaking now");
+    expect(status).not.toBeInTheDocument();
   });
 });

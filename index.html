@@ -1,15 +1,90 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="corporate">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Salvatore Laisa" />
+
+    <!-- Primary Meta Tags -->
+    <title>Standup Shuffler - Random Team Speaker Selection Tool</title>
+    <meta
+      name="title"
+      content="Standup Shuffler - Random Team Speaker Selection Tool"
+    />
     <meta
       name="description"
-      content="Small tool to help manage stadup meetings speaking order."
+      content="A beautiful, modern tool to help manage standup meetings with random participant selection. Add team members and let the shuffler decide who speaks next!"
     />
-    <title>Standup shuffler</title>
+    <meta name="author" content="Salvatore Laisa" />
+    <meta
+      name="keywords"
+      content="standup, scrum, agile, meeting, team, random, shuffle, speaker, selection, productivity"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://salvatorelaisa.github.io/standup-shuffler/"
+    />
+    <meta
+      property="og:title"
+      content="Standup Shuffler - Random Team Speaker Selection Tool"
+    />
+    <meta
+      property="og:description"
+      content="A beautiful, modern tool to help manage standup meetings with random participant selection. Add team members and let the shuffler decide who speaks next!"
+    />
+    <meta
+      property="og:image"
+      content="https://salvatorelaisa.github.io/standup-shuffler/og-image.png"
+    />
+    <meta property="og:site_name" content="Standup Shuffler" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://salvatorelaisa.github.io/standup-shuffler/"
+    />
+    <meta
+      property="twitter:title"
+      content="Standup Shuffler - Random Team Speaker Selection Tool"
+    />
+    <meta
+      property="twitter:description"
+      content="A beautiful, modern tool to help manage standup meetings with random participant selection. Add team members and let the shuffler decide who speaks next!"
+    />
+    <meta
+      property="twitter:image"
+      content="https://salvatorelaisa.github.io/standup-shuffler/og-image.png"
+    />
+    <meta property="twitter:creator" content="@salvatore_laisa" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/src/favicon.svg" />
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Shuffler" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://api.dicebear.com" />
+
+    <!-- Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
   </head>
   <body>
     <div id="app"></div>

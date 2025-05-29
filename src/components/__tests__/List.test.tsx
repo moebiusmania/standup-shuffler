@@ -3,9 +3,16 @@ import { render, screen } from "@testing-library/preact";
 import List from "../List";
 
 describe("List", () => {
-  it("renders empty container when no items provided", () => {
-    const { container } = render(<List items={[]} />);
-    expect(container.firstChild).toBeEmptyDOMElement();
+  it("renders empty state when no items provided", () => {
+    render(<List items={[]} />);
+
+    expect(screen.getByText("No people in queue")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Add people to the list above to get started with your standup rotation."
+      )
+    ).toBeInTheDocument();
+    expect(screen.getByText("👥")).toBeInTheDocument();
   });
 
   it("renders all items in the list", () => {

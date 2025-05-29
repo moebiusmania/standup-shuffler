@@ -8,33 +8,52 @@ import List from "./components/List";
 import Card from "./components/Card";
 import Footer from "./components/Footer";
 
+import styles from "./app.module.css";
+
 const App = (): JSX.Element => {
-  const [people, setPeople] = useState<Array<string>>(GET());
+  const [people, setPeople] = useState<string[]>(GET());
   const [typing, setTyping] = useState<string>("");
   const [current, setCurrent] = useState<string | undefined>(undefined);
 
   const onSubmit = (event: Event): void => {
     event.preventDefault();
-    const newPeople: Array<string> = typing.trim().split(",");
+    const newPeople: string[] = typing
+      .trim()
+      .split(",")
+      .map((name) => name.trim())
+      .filter((name) => name.length > 0);
 
-    setPeople(people.concat(newPeople));
+    if (newPeople.length > 0) {
+      const updatedPeople = [...people, ...newPeople];
+      setPeople(updatedPeople);
+      SAVE(updatedPeople);
+    }
     setTyping("");
-    SAVE(newPeople);
   };
 
-  const onTyping = ({
-    currentTarget,
-  }: JSX.TargetedEvent<HTMLInputElement, Event>): void =>
-    setTyping(currentTarget.value);
+  const onTyping = (event: JSX.TargetedEvent<HTMLInputElement, Event>): void =>
+    setTyping(event.currentTarget.value);
 
   const next = (): void => {
-    const n: number = Math.floor(Math.random() * people.length);
-    const update: Array<string> = people.filter(
-      (_e: string, i: number): boolean => i !== n
+    if (people.length === 0) {
+      const storedPeople = GET();
+      if (storedPeople.length > 0) {
+        setPeople(storedPeople);
+        setCurrent(undefined);
+        return;
+      }
+      setCurrent(undefined);
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * people.length);
+    const selectedPerson = people[randomIndex];
+    const remainingPeople = people.filter(
+      (_person, index) => index !== randomIndex
     );
 
-    setCurrent(people[n]);
-    setPeople(people.length === 0 && GET().length > 0 ? GET() : update);
+    setCurrent(selectedPerson);
+    setPeople(remainingPeople);
   };
 
   const clear = (): void => {
@@ -44,48 +63,50 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <main class="container">
+    <div className={styles.container}>
       <Header />
-      <form class="px-4 w-full" onSubmit={onSubmit}>
+      <main className={styles.main}>
         {!people.length && !current && (
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">
-                Add people to the list (<i>comma-separated list</i>):
-              </span>
-            </label>
-            <div class="relative">
-              <input
-                type="text"
-                placeholder="arthur, trillie, marvin..."
-                class="w-full pr-16 input input-primary input-bordered rounded-none"
-                value={typing}
-                onChange={onTyping}
-                autoComplete="off"
-              />
-              <button class="absolute top-0 right-0 rounded-none btn btn-primary text-white">
-                add
-              </button>
+          <form className={styles.form} onSubmit={onSubmit}>
+            <div className={styles.formGroup}>
+              <label className={styles.label} htmlFor="people-input">
+                Add people to the list (<em>comma-separated list</em>):
+              </label>
+              <div className={styles.inputGroup}>
+                <input
+                  id="people-input"
+                  type="text"
+                  placeholder="arthur, trillie, marvin..."
+                  className={styles.input}
+                  value={typing}
+                  onChange={onTyping}
+                  autoComplete="off"
+                />
+                <button type="submit" className={styles.submitButton}>
+                  Add People
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         )}
-      </form>
 
-      {current && (
-        <section class="px-4 animate-pulse my-8">
-          <Card active={true}>{current}</Card>
-        </section>
-      )}
+        {current && (
+          <section className={styles.currentSection}>
+            <div className={styles.currentLabel}>Currently Speaking</div>
+            <Card current>{current}</Card>
+          </section>
+        )}
 
-      <List items={people} />
+        <List items={people} />
+      </main>
 
       <Footer
         visible={people.length > 0 || current !== undefined}
         next={next}
         clear={clear}
       />
-    </main>
+    </div>
   );
 };
 
-export { App };
+export default App;

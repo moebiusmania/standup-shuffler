@@ -13,15 +13,15 @@ describe("Footer", () => {
   it("renders footer when visible is true", () => {
     render(<Footer visible={true} next={() => {}} clear={() => {}} />);
 
-    expect(screen.getByText("clear list")).toBeInTheDocument();
-    expect(screen.getByText("next one!")).toBeInTheDocument();
+    expect(screen.getByText("Clear List")).toBeInTheDocument();
+    expect(screen.getByText("Next Person")).toBeInTheDocument();
   });
 
   it("calls next function when next button is clicked", () => {
     const nextMock = vi.fn();
     render(<Footer visible={true} next={nextMock} clear={() => {}} />);
 
-    fireEvent.click(screen.getByText("next one!"));
+    fireEvent.click(screen.getByText("Next Person"));
     expect(nextMock).toHaveBeenCalledTimes(1);
   });
 
@@ -29,7 +29,7 @@ describe("Footer", () => {
     const clearMock = vi.fn();
     render(<Footer visible={true} next={() => {}} clear={clearMock} />);
 
-    fireEvent.click(screen.getByText("clear list"));
+    fireEvent.click(screen.getByText("Clear List"));
     expect(clearMock).toHaveBeenCalledTimes(1);
   });
 });

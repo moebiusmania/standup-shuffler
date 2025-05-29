@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://salvatorelaisa.github.io/standup-shuffler/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Block unnecessary paths
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.map$ 
